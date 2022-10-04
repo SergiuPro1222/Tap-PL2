@@ -1,0 +1,28 @@
+-- 1.Noideeia why u even cracked this its free lmao
+-- 2.SuckFeet
+
+for __,v in pairs(game.ReplicatedStorage.Entities.NitrateOre:GetDescendants()) do -- DauCuCietre in tine
+    if v.Name == "Part" and v.BrickColor.Name == "Institutional white" and v.Material.Name == "Slate" then
+
+local DauCuCiatra = Instance.new("BillboardGui",v)
+local TextLabel = Instance.new("TextLabel",DauCuCiatra)
+
+DauCuCiatra.Name = "DauCuCiatra"
+DauCuCiatra.Active = true
+DauCuCiatra.AlwaysOnTop = true
+DauCuCiatra.LightInfluence = 1.000
+DauCuCiatra.MaxDistance = 750.000
+DauCuCiatra.Size = UDim2.new(0, 200, 0, 50)
+
+TextLabel.Parent = DauCuCiatra
+TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.BackgroundTransparency = 1.000
+TextLabel.Size = UDim2.new(0, 200, 0, 50)
+TextLabel.ZIndex = 2
+TextLabel.Font = Enum.Font.Merriweather
+TextLabel.Text = "Nitrate"
+TextLabel.TextColor3 = Color3.fromRGB(250, 250, 250)
+TextLabel.TextSize = 20.000
+        TextLabel.TextYAlignment = Enum.TextYAlignment.Top
+    end
+    end
