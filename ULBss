@@ -8,45 +8,59 @@ local TweenService = game:GetService('TweenService');
 local RenderStepped = RunService.RenderStepped;
 local LocalPlayer = Players.LocalPlayer;
 local Mouse = LocalPlayer:GetMouse();
+
 local ProtectGui = protectgui or (syn and syn.protect_gui) or (function() end);
-local dashwqhgjusjcaseqw = Instance.new('ScreenGui');
-ProtectGui(dashwqhgjusjcaseqw);
-dashwqhgjusjcaseqw.ZIndexBehavior = Enum.ZIndexBehavior.Sibling;
-dashwqhgjusjcaseqw.Name = ""
-dashwqhgjusjcaseqw.ResetOnSpawn = false;
-dashwqhgjusjcaseqw.DisplayOrder = 10;
-dashwqhgjusjcaseqw.Parent = CoreGui;
+
+local ScreenGui = Instance.new('ScreenGui');
+ProtectGui(ScreenGui);
+
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Global;
+ScreenGui.Parent = CoreGui;
+
 local Toggles = {};
 local Options = {};
+
 getgenv().Toggles = Toggles;
 getgenv().Options = Options;
+
 local Library = {
     Registry = {};
     RegistryMap = {};
+
     HudRegistry = {};
+
     FontColor = Color3.fromRGB(255, 255, 255);
     MainColor = Color3.fromRGB(28, 28, 28);
     BackgroundColor = Color3.fromRGB(20, 20, 20);
     AccentColor = Color3.fromRGB(93, 0, 255);
     OutlineColor = Color3.fromRGB(20, 20, 20);
     RiskColor = Color3.fromRGB(245, 205, 48),
+
     Black = Color3.new(0, 0, 0);
     Font = Enum.Font.Code,
+
     OpenedFrames = {};
     DependencyBoxes = {};
+
     Signals = {};
-    dashwqhgjusjcaseqw = dashwqhgjusjcaseqw;
+    ScreenGui = ScreenGui;
 };
+
 local RainbowStep = 0
 local Hue = 0
+
 table.insert(Library.Signals, RenderStepped:Connect(function(Delta)
     RainbowStep = RainbowStep + Delta
+
     if RainbowStep >= (1 / 60) then
         RainbowStep = 0
+
         Hue = Hue + (1 / 400);
+
         if Hue > 1 then
             Hue = 0;
         end;
+
         Library.CurrentRainbowHue = Hue;
         Library.CurrentRainbowColor = Color3.fromHSV(Hue, 0.8, 1);
     end
@@ -183,7 +197,7 @@ function Library:AddToolTip(InfoStr, HoverInstance)
 
         Size = UDim2.fromOffset(X + 5, Y + 4),
         ZIndex = 100,
-        Parent = Library.dashwqhgjusjcaseqw,
+        Parent = Library.ScreenGui,
 
         Visible = false,
     })
@@ -377,14 +391,14 @@ function Library:Unload()
         Library.OnUnload()
     end
 
-    dashwqhgjusjcaseqw:Destroy()
+    ScreenGui:Destroy()
 end
 
 function Library:OnUnload(Callback)
     Library.OnUnload = Callback
 end
 
-Library:GiveSignal(dashwqhgjusjcaseqw.DescendantRemoving:Connect(function(Instance)
+Library:GiveSignal(ScreenGui.DescendantRemoving:Connect(function(Instance)
     if Library.RegistryMap[Instance] then
         Library:RemoveFromRegistry(Instance);
     end;
@@ -439,7 +453,7 @@ do
         });
 
         -- 1/16/23
-        -- Rewrote this to be placed inside the Library dashwqhgjusjcaseqw
+        -- Rewrote this to be placed inside the Library ScreenGui
         -- There was some issue which caused RelativeOffset to be way off
         -- Thus the color picker would never show
 
@@ -451,7 +465,7 @@ do
             Size = UDim2.fromOffset(230, Info.Transparency and 271 or 253);
             Visible = false;
             ZIndex = 15;
-            Parent = dashwqhgjusjcaseqw,
+            Parent = ScreenGui,
         });
 
         DisplayFrame:GetPropertyChangedSignal('AbsolutePosition'):Connect(function()
@@ -660,7 +674,7 @@ do
                 ZIndex = 14,
 
                 Visible = false,
-                Parent = dashwqhgjusjcaseqw
+                Parent = ScreenGui
             })
 
             ContextMenu.Inner = Library:Create('Frame', {
@@ -1046,7 +1060,7 @@ do
             Size = UDim2.new(0, 60, 0, 45 + 2);
             Visible = false;
             ZIndex = 14;
-            Parent = dashwqhgjusjcaseqw;
+            Parent = ScreenGui;
         });
 
         ToggleLabel:GetPropertyChangedSignal('AbsolutePosition'):Connect(function()
@@ -2256,7 +2270,7 @@ do
             BorderColor3 = Color3.new(0, 0, 0);
             ZIndex = 20;
             Visible = false;
-            Parent = dashwqhgjusjcaseqw;
+            Parent = ScreenGui;
         });
 
         local function RecalculateListPosition()
@@ -2671,7 +2685,7 @@ do
         Position = UDim2.new(0, 0, 0, 40);
         Size = UDim2.new(0, 300, 0, 200);
         ZIndex = 100;
-        Parent = dashwqhgjusjcaseqw;
+        Parent = ScreenGui;
     });
 
     Library:Create('UIListLayout', {
@@ -2687,7 +2701,7 @@ do
         Size = UDim2.new(0, 213, 0, 20);
         ZIndex = 200;
         Visible = false;
-        Parent = dashwqhgjusjcaseqw;
+        Parent = ScreenGui;
     });
 
     local WatermarkInner = Library:Create('Frame', {
@@ -2752,7 +2766,7 @@ do
         Size = UDim2.new(0, 210, 0, 20);
         Visible = false;
         ZIndex = 100;
-        Parent = dashwqhgjusjcaseqw;
+        Parent = ScreenGui;
     });
 
     local KeybindInner = Library:Create('Frame', {
@@ -2953,7 +2967,7 @@ function Library:CreateWindow(...)
         Size = Config.Size,
         Visible = false;
         ZIndex = 1;
-        Parent = dashwqhgjusjcaseqw;
+        Parent = ScreenGui;
     });
 
     Library:MakeDraggable(Outer, 25);
@@ -3486,7 +3500,7 @@ function Library:CreateWindow(...)
         Visible = true;
         Text = '';
         Modal = false;
-        Parent = dashwqhgjusjcaseqw;
+        Parent = ScreenGui;
     });
 
     local TransparencyCache = {};
@@ -3519,10 +3533,10 @@ function Library:CreateWindow(...)
                 local CursorOutline = Drawing.new('Triangle');
                 CursorOutline.Thickness = 1;
                 CursorOutline.Filled = false;
-                CursorOutline.Color = Color3.new(157,0,255);
+                CursorOutline.Color = Color3.new(0, 0, 0);
                 CursorOutline.Visible = true;
 
-                while Toggled and dashwqhgjusjcaseqw.Parent do
+                while Toggled and ScreenGui.Parent do
                     InputService.MouseIconEnabled = false;
 
                     local mPos = InputService:GetMouseLocation();
