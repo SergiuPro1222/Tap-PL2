@@ -3540,7 +3540,7 @@ function Library:CreateWindow(...)
                     RenderStepped:Wait();
                 end;
 
-                InputService.MouseIconEnabled = false;
+                InputService.MouseIconEnabled = State;
 
                 Cursor:Remove();
                 CursorOutline:Remove();
