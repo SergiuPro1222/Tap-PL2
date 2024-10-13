@@ -3618,23 +3618,6 @@ function Library:CreateWindow(...)
 
     return Window;
 end;
-
-local function OnPlayerChange()
-    local PlayerList = GetPlayersString();
-
-    for _, Value in next, Options do
-        if Value.Type == 'Dropdown' and Value.SpecialType == 'Player' then
-            Value:SetValues(PlayerList);
-        end;
-    end;
-end;
-
-Players.PlayerAdded:Connect(OnPlayerChange);
-Players.PlayerRemoving:Connect(OnPlayerChange);
-
-getgenv().Library = Library
-return Library
-
 -------------------SEX TOGGLES
 
 
@@ -3673,6 +3656,21 @@ end
 button.MouseButton1Click:Connect(function()
     Library.ToggleKeybind = not Library.ToggleKeybind
     updateButtonText()
-end)
-end
+end);
+end;
 coroutine.wrap(XIHCFL_fake_script)()
+local function OnPlayerChange()
+    local PlayerList = GetPlayersString();
+
+    for _, Value in next, Options do
+        if Value.Type == 'Dropdown' and Value.SpecialType == 'Player' then
+            Value:SetValues(PlayerList);
+        end;
+    end;
+end;
+
+Players.PlayerAdded:Connect(OnPlayerChange);
+Players.PlayerRemoving:Connect(OnPlayerChange);
+
+getgenv().Library = Library
+return Library
