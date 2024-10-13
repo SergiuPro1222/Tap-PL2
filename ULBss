@@ -3618,47 +3618,6 @@ function Library:CreateWindow(...)
 
     return Window;
 end;
--------------------SEX TOGGLES
-
-
-local ToggleMenu = Instance.new("ScreenGui")
-local onoff = Instance.new("Frame")
-local TextButton = Instance.new("TextButton")
-ToggleMenu.Name = "ToggleMenu"
-ToggleMenu.Parent = game.CoreGui
-onoff.Name = "onoff"
-onoff.Parent = ToggleMenu
-onoff.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-onoff.BorderColor3 = Color3.fromRGB(93, 0, 255)
-onoff.Position = UDim2.new(0.460777372, 0, 0.0614207014, 0)
-onoff.Size = UDim2.new(0, 96, 0, 26)
-TextButton.Parent = onoff
-TextButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextButton.BackgroundTransparency = 1.000
-TextButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
-TextButton.BorderSizePixel = 0
-TextButton.Position = UDim2.new(-0.020833334, 0, 0, 0)
-TextButton.Size = UDim2.new(0, 96, 0, 26)
-TextButton.Font = Enum.Font.SourceSans
-TextButton.Text = "Closed"
-TextButton.TextColor3 = Color3.fromRGB(93, 0, 255)
-TextButton.TextSize = 16.000
-local function XIHCFL_fake_script() -- TextButton.LocalScript 
-local script = Instance.new('LocalScript', TextButton)
-local button = script.Parent
-local function updateButtonText()
-    if mainUI.Visible then
-        Library.ToggleKeybind= true
-    else
-        Library.ToggleKeybind = false
-    end
-end
-button.MouseButton1Click:Connect(function()
-    Library.ToggleKeybind = not Library.ToggleKeybind
-    updateButtonText()
-end);
-end;
-coroutine.wrap(XIHCFL_fake_script)()
 local function OnPlayerChange()
     local PlayerList = GetPlayersString();
 
